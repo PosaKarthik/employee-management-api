@@ -1,0 +1,17 @@
+package com.employee.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeRequestDTO {
+
+	
+	private String employeeName;
+	private String employeeEmail;
+	private Double employeeSalary;
+	private String employeeDepartment;
+}
