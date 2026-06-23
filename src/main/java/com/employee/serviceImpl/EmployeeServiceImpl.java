@@ -1,5 +1,7 @@
 package com.employee.serviceImpl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 	private final EmployeeRepository employeeRepository;
 	
 	private static final Logger logger=LoggerFactory.getLogger(EmployeeServiceImpl.class);
+	
+	private EmployeeResponseDTO mapToDTO(Employee employee) {
+		
+		return EmployeeResponseDTO.builder()
+				.employeeId(employee.getEmployeeId())
+				.employeeName(employee.getEmployeeName())
+				.employeeEmail(employee.getEmployeeEmail())
+				.employeeSalary(employee.getEmployeeSalary())
+				.employeeDepartment(employee.getEmployeeDepartment())
+				.build();
+	}
 
 	@Override
 	public EmployeeResponseDTO createEmployee(EmployeeRequestDTO employeeRequestDTO) {
@@ -68,6 +81,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 				.employeeSalary(employee.getEmployeeSalary())
 				.employeeDepartment(employee.getEmployeeDepartment())
 				.build();
+	}
+
+	@Override
+	public List<EmployeeResponseDTO> getAllEmployees() {
+		logger.info("Fetching all employees");
+		
+		List<Employee> employees=employeeRepository.findAll();
+		return employees.stream()
+						.map(this::mapToDTO)
+						.toList();
 	}
 	
 	

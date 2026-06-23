@@ -1,5 +1,7 @@
 package com.employee.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +37,10 @@ public class EmployeeController {
 		return ResponseEntity.ok(employeeService.getEmployeeById(id));
 	}
 	
+	@GetMapping("/getallemployees")
+	public ResponseEntity<List<EmployeeResponseDTO>> getAllEmployees(){
+		return ResponseEntity.ok(employeeService.getAllEmployees());
+	}
 	
 
 }
