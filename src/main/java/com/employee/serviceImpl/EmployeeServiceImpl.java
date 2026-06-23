@@ -51,13 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 						 				
 		
-		return EmployeeResponseDTO.builder()
-				.employeeId(savedEntity.getEmployeeId())
-				.employeeName(savedEntity.getEmployeeName())
-				.employeeEmail(savedEntity.getEmployeeEmail())
-				.employeeSalary(savedEntity.getEmployeeSalary())
-				.employeeDepartment(savedEntity.getEmployeeDepartment())
-				.build();
+		return mapToDTO(savedEntity);
 	}
 
 	@Override
@@ -69,18 +63,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 										.orElse(null);
 		
 		if(employee == null) {
-			logger.info("Employee not found with : {}",id);
+			logger.warn("Employee not found with : {}",id);
 			return null;
 		}
 				
 
-		return EmployeeResponseDTO.builder()
-				.employeeId(employee.getEmployeeId())
-				.employeeName(employee.getEmployeeName())
-				.employeeEmail(employee.getEmployeeEmail())
-				.employeeSalary(employee.getEmployeeSalary())
-				.employeeDepartment(employee.getEmployeeDepartment())
-				.build();
+		return mapToDTO(employee);
 	}
 
 	@Override
@@ -91,6 +79,33 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employees.stream()
 						.map(this::mapToDTO)
 						.toList();
+	}
+
+	@Override
+	public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO employeeRequestDTO) {
+		
+		logger.info("Updating employee with id : {}",id);
+		
+		Employee employee=employeeRepository.findById(id)
+											.orElse(null);
+		
+		if(employee == null) {
+			logger.warn("Employee not found with : {}",id);
+			return null;
+		}
+		
+		employee.setEmployeeName(employeeRequestDTO.getEmployeeName());
+		employee.setEmployeeEmail(employeeRequestDTO.getEmployeeEmail());
+		employee.setEmployeeSalary(employeeRequestDTO.getEmployeeSalary());
+		employee.setEmployeeDepartment(employeeRequestDTO.getEmployeeDepartment());
+		
+		Employee updatedEmployee=employeeRepository.save(employee);
+		
+		logger.info("Employee updated successfully with id : {}",updatedEmployee.getEmployeeId());
+		
+		
+		return mapToDTO(updatedEmployee);
+	
 	}
 	
 	
