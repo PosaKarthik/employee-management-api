@@ -123,6 +123,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Employee Deleted Successfully! ID : {}",id);
 		
 	}
+
+	@Override
+	public List<EmployeeResponseDTO> getEmployeesByDepartment(String department) {
+		
+		logger.info("Fetching employees from department {}",department);
+		
+		return employeeRepository.findByEmployeeDepartment(department)
+									.stream()
+									.map(this::mapToDTO)
+									.toList();
+						
+	}
+
+	
+	
+	
+	
+	
 	
 	
 
