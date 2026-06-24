@@ -107,6 +107,22 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return mapToDTO(updatedEmployee);
 	
 	}
+
+	@Override
+	public void deleteEmployee(Long id) {
+		logger.info("Deleting employee wtih id :{}",id);
+		
+		Employee employee=employeeRepository.findById(id)
+											.orElse(null);
+		if(employee == null) {
+			logger.warn("Employee not found with id :{}", id);
+			return;
+		}
+		employeeRepository.deleteById(id);
+		
+		logger.info("Employee Deleted Successfully! ID : {}",id);
+		
+	}
 	
 	
 
