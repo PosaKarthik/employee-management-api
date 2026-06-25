@@ -68,5 +68,10 @@ public class EmployeeController {
 	}
 	
 	
+	@GetMapping("/salary/{salary}")
+	public ResponseEntity<List<EmployeeResponseDTO>> getEmployeesSalaryGreaterThan(@PathVariable Double salary){
+		return ResponseEntity.ok(employeeService.getEmployeesSalaryGreaterThan(salary));
+	}
+	
 
 }

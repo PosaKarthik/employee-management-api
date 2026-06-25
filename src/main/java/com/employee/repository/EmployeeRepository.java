@@ -14,5 +14,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
 	List<Employee> searchByEmployeeName(String name);
 	
+	List<Employee> queryByEmployeeSalaryGreaterThan(Double salary);
 
 }

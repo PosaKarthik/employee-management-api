@@ -148,6 +148,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 									.toList();
 	}
 
+	@Override
+	public List<EmployeeResponseDTO> getEmployeesSalaryGreaterThan(Double salary) {
+		
+		logger.info("Fetching employee with salary greater than {}",salary);
+		
+		return employeeRepository.queryByEmployeeSalaryGreaterThan(salary)
+									.stream()
+									.map(this::mapToDTO)
+									.toList();
+	}
+
 	
 	
 	
