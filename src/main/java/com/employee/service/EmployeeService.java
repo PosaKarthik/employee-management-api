@@ -19,5 +19,7 @@ public interface EmployeeService {
 	void deleteEmployee(Long id);
 	
 	List<EmployeeResponseDTO> getEmployeesByDepartment(String department);
+	
+	List<EmployeeResponseDTO> getEmployeesByName(String name);
 
 }

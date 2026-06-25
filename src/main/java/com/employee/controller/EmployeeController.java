@@ -61,5 +61,12 @@ public class EmployeeController {
 	public ResponseEntity<List<EmployeeResponseDTO>> getEmployeesByDepartment(@PathVariable String department){
 		return ResponseEntity.ok(employeeService.getEmployeesByDepartment(department));
 	}
+	
+	@GetMapping("/name/{name}")
+	public ResponseEntity<List<EmployeeResponseDTO>> getEmployeesByName(@PathVariable String name){
+		return ResponseEntity.ok(employeeService.getEmployeesByName(name));
+	}
+	
+	
 
 }

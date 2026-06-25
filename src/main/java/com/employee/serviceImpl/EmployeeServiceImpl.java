@@ -136,6 +136,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 						
 	}
 
+	@Override
+	public List<EmployeeResponseDTO> getEmployeesByName(String name) {
+		
+		logger.info("Fetching employees by name : {}",name);
+		
+		
+		return employeeRepository.searchByEmployeeName(name)
+									.stream()
+									.map(this::mapToDTO)
+									.toList();
+	}
+
 	
 	
 	

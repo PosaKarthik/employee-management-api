@@ -11,5 +11,8 @@ import com.employee.entity.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
 	List<Employee> findByEmployeeDepartment(String department);
+	
+	List<Employee> searchByEmployeeName(String name);
+	
 
 }
