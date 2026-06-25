@@ -17,6 +17,7 @@ import com.employee.dto.EmployeeRequestDTO;
 import com.employee.dto.EmployeeResponseDTO;
 import com.employee.service.EmployeeService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +29,7 @@ public class EmployeeController {
 	
 	
 	@PostMapping
-	public ResponseEntity<EmployeeResponseDTO> createEmployee(@RequestBody EmployeeRequestDTO employeeRequestDTO){
+	public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeRequestDTO employeeRequestDTO){
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(employeeService.createEmployee(employeeRequestDTO));
 	}

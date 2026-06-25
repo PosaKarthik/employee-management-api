@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.employee.dto.EmployeeRequestDTO;
 import com.employee.dto.EmployeeResponseDTO;
 import com.employee.entity.Employee;
+import com.employee.exception.EmployeeNotFoundException;
 import com.employee.repository.EmployeeRepository;
 import com.employee.service.EmployeeService;
 
@@ -60,14 +61,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Fethcing employee with id : {}",id);
 		
 		Employee employee=employeeRepository.findById(id)
-										.orElse(null);
-		
-		if(employee == null) {
-			logger.warn("Employee not found with : {}",id);
-			return null;
-		}
+										 .orElseThrow(
+												 () -> new EmployeeNotFoundException("Employee not found with id : "+id));
 				
-
 		return mapToDTO(employee);
 	}
 
@@ -87,12 +83,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Updating employee with id : {}",id);
 		
 		Employee employee=employeeRepository.findById(id)
-											.orElse(null);
+				.orElseThrow(
+						 () -> new EmployeeNotFoundException("Employee not found with id : "+id));
 		
-		if(employee == null) {
-			logger.warn("Employee not found with : {}",id);
-			return null;
-		}
 		
 		employee.setEmployeeName(employeeRequestDTO.getEmployeeName());
 		employee.setEmployeeEmail(employeeRequestDTO.getEmployeeEmail());
@@ -113,11 +106,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Deleting employee wtih id :{}",id);
 		
 		Employee employee=employeeRepository.findById(id)
-											.orElse(null);
-		if(employee == null) {
-			logger.warn("Employee not found with id :{}", id);
-			return;
-		}
+				.orElseThrow(
+						 () -> new EmployeeNotFoundException("Employee not found with id : "+id));
+		
 		employeeRepository.deleteById(id);
 		
 		logger.info("Employee Deleted Successfully! ID : {}",id);
