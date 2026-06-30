@@ -103,7 +103,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public void deleteEmployee(Long id) {
-		logger.info("Deleting employee wtih id :{}",id);
+		logger.info("Deleting employee with id :{}",id);
 		
 		Employee employee=employeeRepository.findById(id)
 				.orElseThrow(
@@ -133,7 +133,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Fetching employees by name : {}",name);
 		
 		
-		return employeeRepository.searchByEmployeeName(name)
+		return employeeRepository.findByEmployeeName(name)
 									.stream()
 									.map(this::mapToDTO)
 									.toList();
@@ -144,7 +144,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		logger.info("Fetching employee with salary greater than {}",salary);
 		
-		return employeeRepository.queryByEmployeeSalaryGreaterThan(salary)
+		return employeeRepository.findByEmployeeSalaryGreaterThan(salary)
 									.stream()
 									.map(this::mapToDTO)
 									.toList();

@@ -1,5 +1,6 @@
 package com.employee.response;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -15,4 +16,13 @@ public class ValidationErrorResponse extends ErrorResponse{
 	
 	private List<FieldErrorDTO> errors;
 
+	public ValidationErrorResponse(String message, int status, String error, String path, LocalDateTime timestamp,List<FieldErrorDTO> errors) {
+		super(message, status, error, path, timestamp);
+		this.errors=errors;
+	}
+
+	
+	
+	
+	
 }
