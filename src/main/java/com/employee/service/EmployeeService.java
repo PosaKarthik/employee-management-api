@@ -23,5 +23,7 @@ public interface EmployeeService {
 	List<EmployeeResponseDTO> getEmployeesByName(String name);
 	
 	List<EmployeeResponseDTO> getEmployeesSalaryGreaterThan(Double salary);
+	
+	List<EmployeeResponseDTO> createEmployees(List<EmployeeRequestDTO> employeeRequestDTO);
 
 }

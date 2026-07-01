@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,14 +18,20 @@ import com.employee.response.FieldErrorDTO;
 import com.employee.response.ValidationErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
+	
+	private static final Logger logger=LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	
  
 	@ExceptionHandler(EmployeeNotFoundException.class)
 	public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException e,HttpServletRequest request){
 		
+		
+		logger.warn("Employee not found. Path: {}, Message: {}",request.getRequestURI(),e.getMessage());
 		
 		ErrorResponse errorResponse=ErrorResponse.builder()
 												.message(e.getMessage())
@@ -42,6 +50,9 @@ public class GlobalExceptionHandler {
 						//It contains validation errors
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e,HttpServletRequest request){
+		
+		
+		logger.warn("Validation failed for request: {}",request.getRequestURI());
 		
 		List<FieldErrorDTO> fieldErrors=new ArrayList<>();
 		

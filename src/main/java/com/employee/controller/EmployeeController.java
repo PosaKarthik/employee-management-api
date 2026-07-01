@@ -74,5 +74,11 @@ public class EmployeeController {
 		return ResponseEntity.ok(employeeService.getEmployeesSalaryGreaterThan(salary));
 	}
 	
+	
+	@PostMapping("/batch")
+	public ResponseEntity<List<EmployeeResponseDTO>> createEmployees(@Valid @RequestBody List<EmployeeRequestDTO> employeeRequestDTOs){
+		return ResponseEntity.ok(employeeService.createEmployees(employeeRequestDTOs));
+	}
+	
 
 }

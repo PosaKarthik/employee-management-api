@@ -33,6 +33,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 				.employeeDepartment(employee.getEmployeeDepartment())
 				.build();
 	}
+	
+	public Employee mapToEntity(EmployeeRequestDTO employeeRequestDTO) {
+			
+		return Employee.builder()
+						.employeeName(employeeRequestDTO.getEmployeeName())
+						.employeeEmail(employeeRequestDTO.getEmployeeEmail())
+						.employeeSalary(employeeRequestDTO.getEmployeeSalary())
+						.employeeDepartment(employeeRequestDTO.getEmployeeDepartment())
+						.build();							
+	}
 
 	@Override
 	public EmployeeResponseDTO createEmployee(EmployeeRequestDTO employeeRequestDTO) {
@@ -148,6 +158,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 									.stream()
 									.map(this::mapToDTO)
 									.toList();
+	}
+
+	@Override
+	public List<EmployeeResponseDTO> createEmployees(List<EmployeeRequestDTO> employeeRequestDTOs) {
+		
+		logger.info("Creating {} employees",employeeRequestDTOs.size());
+		
+		List<Employee> employees=employeeRequestDTOs.stream()
+													.map(this::mapToEntity)
+													.toList();
+		
+		List<Employee> savedEmployees=employeeRepository.saveAll(employees);
+		
+		logger.info("Successfully created {} employees",savedEmployees.size());
+		
+		return savedEmployees.stream()
+							 .map(this::mapToDTO)
+							 .toList();
 	}
 
 	
