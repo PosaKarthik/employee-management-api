@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.dto.EmployeeRequestDTO;
 import com.employee.dto.EmployeeResponseDTO;
+import com.employee.response.PageResponseDTO;
 import com.employee.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -80,5 +82,9 @@ public class EmployeeController {
 		return ResponseEntity.ok(employeeService.createEmployees(employeeRequestDTOs));
 	}
 	
+	@GetMapping("/bypagination")
+	public ResponseEntity<PageResponseDTO<EmployeeResponseDTO>> getAllEmployeesByPagination(@RequestParam(defaultValue="0") int pageNumber,@RequestParam(defaultValue="0") int pageSize){
+		return ResponseEntity.ok(employeeService.getAllEmployeesByPagination(pageNumber, pageSize));
+	}
 
 }

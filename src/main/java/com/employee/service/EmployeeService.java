@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.employee.dto.EmployeeRequestDTO;
 import com.employee.dto.EmployeeResponseDTO;
+import com.employee.response.PageResponseDTO;
 
 public interface EmployeeService {
 	
@@ -25,5 +26,7 @@ public interface EmployeeService {
 	List<EmployeeResponseDTO> getEmployeesSalaryGreaterThan(Double salary);
 	
 	List<EmployeeResponseDTO> createEmployees(List<EmployeeRequestDTO> employeeRequestDTO);
+	
+	PageResponseDTO<EmployeeResponseDTO> getAllEmployeesByPagination(int pageNumber,int pageSize);
 
 }

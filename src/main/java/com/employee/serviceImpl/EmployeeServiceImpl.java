@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.employee.dto.EmployeeRequestDTO;
@@ -11,6 +14,7 @@ import com.employee.dto.EmployeeResponseDTO;
 import com.employee.entity.Employee;
 import com.employee.exception.EmployeeNotFoundException;
 import com.employee.repository.EmployeeRepository;
+import com.employee.response.PageResponseDTO;
 import com.employee.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
@@ -176,6 +180,36 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return savedEmployees.stream()
 							 .map(this::mapToDTO)
 							 .toList();
+	}
+
+	@Override
+	public PageResponseDTO<EmployeeResponseDTO> getAllEmployeesByPagination(int pageNumber, int pageSize) {
+		
+		logger.info("Fetching employees with pagination. Page: {},Size: {}",pageNumber,pageSize);
+		
+		Pageable pageable=PageRequest.of(pageNumber, pageSize);
+		
+		Page<Employee> employeePage=employeeRepository.findAll(pageable);
+		
+		List<EmployeeResponseDTO> employeeDTOs=employeePage.getContent()
+														.stream()
+														.map(this::mapToDTO)
+														.toList();
+		
+		logger.info("Successfully fetched {} employees from page {}",employeeDTOs.size(),pageNumber);
+		
+		return PageResponseDTO.<EmployeeResponseDTO>builder()
+								.content(employeeDTOs)
+								.pageNumber(employeePage.getNumber())
+								.pageSize(employeePage.getSize())
+								.totalElements(employeePage.getTotalElements())
+								.totalPages(employeePage.getTotalPages())
+								.first(employeePage.isFirst())
+								.last(employeePage.isLast())
+								.hasNext(employeePage.hasNext())
+								.hasPrevious(employeePage.hasPrevious())
+								.build();						
+								
 	}
 
 	
