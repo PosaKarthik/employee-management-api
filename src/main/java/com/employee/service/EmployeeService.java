@@ -2,6 +2,8 @@ package com.employee.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+
 import com.employee.dto.EmployeeRequestDTO;
 import com.employee.dto.EmployeeResponseDTO;
 import com.employee.response.PageResponseDTO;
@@ -27,6 +29,6 @@ public interface EmployeeService {
 	
 	List<EmployeeResponseDTO> createEmployees(List<EmployeeRequestDTO> employeeRequestDTO);
 	
-	PageResponseDTO<EmployeeResponseDTO> getAllEmployeesByPagination(int pageNumber,int pageSize);
+	PageResponseDTO<EmployeeResponseDTO> getAllEmployeesByPagination(int pageNumber,int pageSize, Sort.Direction direction, String sortBy);
 
 }

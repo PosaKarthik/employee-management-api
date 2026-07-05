@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.employee.dto.EmployeeRequestDTO;
@@ -183,11 +184,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public PageResponseDTO<EmployeeResponseDTO> getAllEmployeesByPagination(int pageNumber, int pageSize) {
+	public PageResponseDTO<EmployeeResponseDTO> getAllEmployeesByPagination(int pageNumber, int pageSize, Sort.Direction direction, String sortBy) {
 		
-		logger.info("Fetching employees with pagination. Page: {},Size: {}",pageNumber,pageSize);
+		logger.info("Fetching employees with pagination and sorting. Page: {}, Size: {}, SortBy: {}",pageNumber,pageSize,sortBy);
 		
-		Pageable pageable=PageRequest.of(pageNumber, pageSize);
+		Sort sort=Sort.by(direction, sortBy);
+		
+		Pageable pageable=PageRequest.of(pageNumber, pageSize, sort);
 		
 		Page<Employee> employeePage=employeeRepository.findAll(pageable);
 		

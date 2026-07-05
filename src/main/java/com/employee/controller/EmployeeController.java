@@ -2,6 +2,7 @@ package com.employee.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -83,8 +84,11 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/bypagination")
-	public ResponseEntity<PageResponseDTO<EmployeeResponseDTO>> getAllEmployeesByPagination(@RequestParam(defaultValue="0") int pageNumber,@RequestParam(defaultValue="0") int pageSize){
-		return ResponseEntity.ok(employeeService.getAllEmployeesByPagination(pageNumber, pageSize));
+	public ResponseEntity<PageResponseDTO<EmployeeResponseDTO>> getAllEmployeesByPagination(@RequestParam(defaultValue="0") int pageNumber,
+																							@RequestParam(defaultValue="0") int pageSize,
+																							@RequestParam(defaultValue="ASC") Sort.Direction direction,
+																							@RequestParam(defaultValue="employeeId") String sortBy){
+		return ResponseEntity.ok(employeeService.getAllEmployeesByPagination(pageNumber, pageSize, direction, sortBy));
 	}
 
 }
