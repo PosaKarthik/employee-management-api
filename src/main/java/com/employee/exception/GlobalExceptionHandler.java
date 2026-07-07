@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException e,HttpServletRequest request){
 		
 		
-		logger.warn("Employee not found. Path: {}, Message: {}",request.getRequestURI(),e.getMessage());
+		logger.error("Employee not found. Path: {}, Message: {}",request.getRequestURI(),e.getMessage());
 		
 		ErrorResponse errorResponse=ErrorResponse.builder()
 												.message(e.getMessage())
@@ -45,18 +45,15 @@ public class GlobalExceptionHandler {
 	}
 	
 	
-	//Spring MVC throws this exception
-	
-						//It contains validation errors
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e,HttpServletRequest request){
 		
 		
-		logger.warn("Validation failed for request: {}",request.getRequestURI());
+		logger.error("Validation failed for request: {}",request.getRequestURI());
 		
 		List<FieldErrorDTO> fieldErrors=new ArrayList<>();
 		
-		//Spring stores all validation results in BindingResult
 		
 		for(FieldError fieldError:e.getBindingResult().getFieldErrors()) {
 			
@@ -75,6 +72,22 @@ public class GlobalExceptionHandler {
 																					fieldErrors);
 		
 		return ResponseEntity.badRequest().body(validationErrorResponse);
+	}
+	
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ErrorResponse> handleException(Exception e,HttpServletRequest httpServletRequest){
+		
+		logger.error("Unexpected error occured. Path : {}, Message: {}",httpServletRequest.getRequestURI(),e.getMessage());
+		
+		ErrorResponse errorResponse=ErrorResponse.builder()
+												.message("Something went wrong")
+												.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+												.error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+												.path(httpServletRequest.getRequestURI())
+												.timestamp(LocalDateTime.now())
+												.build();
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
 
 }

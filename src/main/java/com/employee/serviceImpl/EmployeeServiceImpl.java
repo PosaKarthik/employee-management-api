@@ -14,6 +14,7 @@ import com.employee.dto.EmployeeRequestDTO;
 import com.employee.dto.EmployeeResponseDTO;
 import com.employee.entity.Employee;
 import com.employee.exception.EmployeeNotFoundException;
+import com.employee.mapper.EmployeeMapper;
 import com.employee.repository.EmployeeRepository;
 import com.employee.response.PageResponseDTO;
 import com.employee.service.EmployeeService;
@@ -26,28 +27,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	private final EmployeeRepository employeeRepository;
 	
+	private final EmployeeMapper employeeMapper;
+	
 	private static final Logger logger=LoggerFactory.getLogger(EmployeeServiceImpl.class);
 	
-	private EmployeeResponseDTO mapToDTO(Employee employee) {
-		
-		return EmployeeResponseDTO.builder()
-				.employeeId(employee.getEmployeeId())
-				.employeeName(employee.getEmployeeName())
-				.employeeEmail(employee.getEmployeeEmail())
-				.employeeSalary(employee.getEmployeeSalary())
-				.employeeDepartment(employee.getEmployeeDepartment())
-				.build();
-	}
-	
-	public Employee mapToEntity(EmployeeRequestDTO employeeRequestDTO) {
-			
-		return Employee.builder()
-						.employeeName(employeeRequestDTO.getEmployeeName())
-						.employeeEmail(employeeRequestDTO.getEmployeeEmail())
-						.employeeSalary(employeeRequestDTO.getEmployeeSalary())
-						.employeeDepartment(employeeRequestDTO.getEmployeeDepartment())
-						.build();							
-	}
 
 	@Override
 	public EmployeeResponseDTO createEmployee(EmployeeRequestDTO employeeRequestDTO) {
@@ -67,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 						 				
 		
-		return mapToDTO(savedEntity);
+		return employeeMapper.mapToDTO(savedEntity);
 	}
 
 	@Override
@@ -79,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 										 .orElseThrow(
 												 () -> new EmployeeNotFoundException("Employee not found with id : "+id));
 				
-		return mapToDTO(employee);
+		return employeeMapper.mapToDTO(employee);
 	}
 
 	@Override
@@ -88,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		List<Employee> employees=employeeRepository.findAll();
 		return employees.stream()
-						.map(this::mapToDTO)
+						.map(employeeMapper::mapToDTO)
 						.toList();
 	}
 
@@ -112,7 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Employee updated successfully with id : {}",updatedEmployee.getEmployeeId());
 		
 		
-		return mapToDTO(updatedEmployee);
+		return employeeMapper.mapToDTO(updatedEmployee);
 	
 	}
 
@@ -137,7 +120,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		return employeeRepository.findByEmployeeDepartment(department)
 									.stream()
-									.map(this::mapToDTO)
+									.map(employeeMapper::mapToDTO)
 									.toList();
 						
 	}
@@ -150,7 +133,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		return employeeRepository.findByEmployeeName(name)
 									.stream()
-									.map(this::mapToDTO)
+									.map(employeeMapper::mapToDTO)
 									.toList();
 	}
 
@@ -161,7 +144,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		return employeeRepository.findByEmployeeSalaryGreaterThan(salary)
 									.stream()
-									.map(this::mapToDTO)
+									.map(employeeMapper::mapToDTO)
 									.toList();
 	}
 
@@ -171,7 +154,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Creating {} employees",employeeRequestDTOs.size());
 		
 		List<Employee> employees=employeeRequestDTOs.stream()
-													.map(this::mapToEntity)
+													.map(employeeMapper::mapToEntity)
 													.toList();
 		
 		List<Employee> savedEmployees=employeeRepository.saveAll(employees);
@@ -179,7 +162,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		logger.info("Successfully created {} employees",savedEmployees.size());
 		
 		return savedEmployees.stream()
-							 .map(this::mapToDTO)
+							 .map(employeeMapper::mapToDTO)
 							 .toList();
 	}
 
@@ -196,7 +179,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		List<EmployeeResponseDTO> employeeDTOs=employeePage.getContent()
 														.stream()
-														.map(this::mapToDTO)
+														.map(employeeMapper::mapToDTO)
 														.toList();
 		
 		logger.info("Successfully fetched {} employees from page {}",employeeDTOs.size(),pageNumber);

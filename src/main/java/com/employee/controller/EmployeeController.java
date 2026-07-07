@@ -113,7 +113,7 @@ public class EmployeeController {
 
 	@Operation(summary = "Create multiple employees", description = "Creates multiple employees in a single request")
 	@ApiResponses({ @ApiResponse(responseCode = "201", description = "Employees created successfully"),
-			@ApiResponse(responseCode = "400", description = "Validation failed",content=@Content(mediaType="applicaiton/json",schema=@Schema(implementation=ValidationErrorResponse.class))) })
+			@ApiResponse(responseCode = "400", description = "Validation failed", content = @Content(mediaType = "applicaiton/json", schema = @Schema(implementation = ValidationErrorResponse.class))) })
 	@PostMapping("/batch")
 	public ResponseEntity<List<EmployeeResponseDTO>> createEmployees(
 			@Valid @RequestBody List<EmployeeRequestDTO> employeeRequestDTOs) {
