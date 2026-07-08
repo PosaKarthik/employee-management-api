@@ -139,4 +139,151 @@ Client
 - OpenAPI / Swagger Documentation
 - Spring Data JPA
 
-- 
+## 📂 Project Structure
+
+```text
+employee-management-api
+│
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.posakarthik.employeemanagement
+│   │   │       ├── config
+│   │   │       ├── controller
+│   │   │       ├── dto
+│   │   │       ├── entity
+│   │   │       ├── exception
+│   │   │       ├── mapper
+│   │   │       ├── repository
+│   │   │       ├── response
+│   │   │       ├── service
+│   │   │       └── EmployeeManagementApiApplication.java
+│   │   │
+│   │   └── resources
+│   │       ├── application.yml
+│   │       ├── application-dev.yml
+│   │       └── application-prod.yml
+│   │
+│   └── test
+│
+├── pom.xml
+└── README.md
+```
+
+## 🌐 REST API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/api/employees` | Create a new employee |
+| GET | `/api/employees/{id}` | Get employee by ID |
+| GET | `/api/employees` | Get all employees |
+| PUT | `/api/employees/{id}` | Update employee |
+| DELETE | `/api/employees/{id}` | Delete employee |
+| GET | `/api/employees/department/{department}` | Search by department |
+| GET | `/api/employees/name/{name}` | Search by employee name |
+| GET | `/api/employees/salary/{salary}` | Search employees with salary greater than the given amount |
+| POST | `/api/employees/batch` | Create multiple employees |
+| GET | `/api/employees/bypaginationandsorting` | Get employees with pagination and sorting |
+
+## 📄 Pagination & Sorting Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| pageNumber | Page number (starts from 0) | 0 |
+| pageSize | Number of records per page | 5 |
+| direction | Sort direction (ASC/DESC) | ASC |
+| sortBy | Field name for sorting | employeeId |
+
+## ⚠️ Validation
+
+The application validates incoming request data using **Jakarta Bean Validation**.
+
+### Example Validations
+
+- Employee Name is required.
+- Employee Email must be valid.
+- Employee Salary must be greater than zero.
+- Employee Department is required.
+
+Validation is automatically performed using the `@Valid` annotation.
+
+## 🚨 Error Response
+
+### Employee Not Found (404)
+
+```json
+{
+  "message": "Employee not found with id : 5",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/api/employees/5",
+  "timestamp": "2026-07-09T18:30:25"
+}
+```
+
+### Validation Failed (400)
+
+```json
+{
+  "message": "Validation Failed",
+  "status": 400,
+  "error": "Bad Request",
+  "path": "/api/employees",
+  "timestamp": "2026-07-09T18:30:25",
+  "fieldErrors": [
+    {
+      "field": "employeeEmail",
+      "message": "Employee email should be valid"
+    },
+    {
+      "field": "employeeName",
+      "message": "Employee name is required"
+    }
+  ]
+}
+```
+
+## 📸 Swagger Documentation
+
+Swagger UI is available at:
+
+```text
+http://localhost:7070/swagger-ui/index.html
+```
+
+After deployment, this section will be updated with the live Swagger URL.
+
+> **Screenshot:** *(Add a screenshot after deployment.)*
+
+## 🗄️ Database
+
+The application uses **MySQL** as the relational database.
+
+### Employee Table
+
+| Column | Type |
+|---------|------|
+| employee_id | BIGINT |
+| employee_name | VARCHAR |
+| employee_email | VARCHAR |
+| employee_salary | DOUBLE |
+| employee_department | VARCHAR |
+
+## 📊 Logging
+
+The application uses **SLF4J** for logging.
+
+Logs are maintained for:
+
+- Service layer operations
+- Business events
+- Exception handling
+- Validation failures
+
+Log levels:
+
+- INFO
+- DEBUG
+- ERROR
+
+  
