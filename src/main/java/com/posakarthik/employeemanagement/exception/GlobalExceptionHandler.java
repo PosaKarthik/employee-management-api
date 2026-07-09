@@ -1,4 +1,4 @@
-package com.employee.exception;
+package com.posakarthik.employeemanagement.exception;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.employee.response.ErrorResponse;
-import com.employee.response.FieldErrorDTO;
-import com.employee.response.ValidationErrorResponse;
+import com.posakarthik.employeemanagement.response.ErrorResponse;
+import com.posakarthik.employeemanagement.response.FieldErrorDTO;
+import com.posakarthik.employeemanagement.response.ValidationErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

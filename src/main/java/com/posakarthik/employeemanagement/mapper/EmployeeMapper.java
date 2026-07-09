@@ -1,10 +1,10 @@
-package com.employee.mapper;
+package com.posakarthik.employeemanagement.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.employee.dto.EmployeeRequestDTO;
-import com.employee.dto.EmployeeResponseDTO;
-import com.employee.entity.Employee;
+import com.posakarthik.employeemanagement.dto.EmployeeRequestDTO;
+import com.posakarthik.employeemanagement.dto.EmployeeResponseDTO;
+import com.posakarthik.employeemanagement.entity.Employee;
 
 @Component
 public class EmployeeMapper {

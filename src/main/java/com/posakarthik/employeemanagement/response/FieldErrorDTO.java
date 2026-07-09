@@ -1,4 +1,4 @@
-package com.employee.response;
+package com.posakarthik.employeemanagement.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package com.employee.response;
+package com.posakarthik.employeemanagement.response;
 
 import java.util.List;
 
-import com.employee.dto.EmployeeResponseDTO;
+import com.posakarthik.employeemanagement.dto.EmployeeResponseDTO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

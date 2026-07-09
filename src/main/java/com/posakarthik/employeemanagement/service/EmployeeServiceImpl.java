@@ -1,4 +1,4 @@
-package com.employee.serviceImpl;
+package com.posakarthik.employeemanagement.service;
 
 import java.util.List;
 
@@ -10,14 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.employee.dto.EmployeeRequestDTO;
-import com.employee.dto.EmployeeResponseDTO;
-import com.employee.entity.Employee;
-import com.employee.exception.EmployeeNotFoundException;
-import com.employee.mapper.EmployeeMapper;
-import com.employee.repository.EmployeeRepository;
-import com.employee.response.PageResponseDTO;
-import com.employee.service.EmployeeService;
+import com.posakarthik.employeemanagement.dto.EmployeeRequestDTO;
+import com.posakarthik.employeemanagement.dto.EmployeeResponseDTO;
+import com.posakarthik.employeemanagement.entity.Employee;
+import com.posakarthik.employeemanagement.exception.EmployeeNotFoundException;
+import com.posakarthik.employeemanagement.mapper.EmployeeMapper;
+import com.posakarthik.employeemanagement.repository.EmployeeRepository;
+import com.posakarthik.employeemanagement.response.PageResponseDTO;
 
 import lombok.RequiredArgsConstructor;
 

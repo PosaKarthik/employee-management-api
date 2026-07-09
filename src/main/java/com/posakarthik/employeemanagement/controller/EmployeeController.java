@@ -1,4 +1,4 @@
-package com.employee.controller;
+package com.posakarthik.employeemanagement.controller;
 
 import java.util.List;
 
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.employee.dto.EmployeeRequestDTO;
-import com.employee.dto.EmployeeResponseDTO;
-import com.employee.response.ErrorResponse;
-import com.employee.response.PageResponseDTO;
-import com.employee.response.ValidationErrorResponse;
-import com.employee.service.EmployeeService;
+import com.posakarthik.employeemanagement.dto.EmployeeRequestDTO;
+import com.posakarthik.employeemanagement.dto.EmployeeResponseDTO;
+import com.posakarthik.employeemanagement.response.ErrorResponse;
+import com.posakarthik.employeemanagement.response.PageResponseDTO;
+import com.posakarthik.employeemanagement.response.ValidationErrorResponse;
+import com.posakarthik.employeemanagement.service.EmployeeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

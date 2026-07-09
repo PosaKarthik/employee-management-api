@@ -1,4 +1,4 @@
-package com.employee.entity;
+package com.posakarthik.employeemanagement.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -9,7 +9,7 @@
 		<version>3.5.15</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.employeemanagement</groupId>
+	<groupId>com.posakarthik</groupId>
 	<artifactId>employee-management-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>employee-management-api</name>

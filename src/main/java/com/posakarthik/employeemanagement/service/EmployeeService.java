@@ -1,12 +1,12 @@
-package com.employee.service;
+package com.posakarthik.employeemanagement.service;
 
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
 
-import com.employee.dto.EmployeeRequestDTO;
-import com.employee.dto.EmployeeResponseDTO;
-import com.employee.response.PageResponseDTO;
+import com.posakarthik.employeemanagement.dto.EmployeeRequestDTO;
+import com.posakarthik.employeemanagement.dto.EmployeeResponseDTO;
+import com.posakarthik.employeemanagement.response.PageResponseDTO;
 
 public interface EmployeeService {
 	

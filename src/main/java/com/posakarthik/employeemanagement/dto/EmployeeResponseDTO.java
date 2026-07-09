@@ -1,4 +1,4 @@
-package com.employee.dto;
+package com.posakarthik.employeemanagement.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
