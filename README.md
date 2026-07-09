@@ -286,4 +286,125 @@ Log levels:
 - DEBUG
 - ERROR
 
-  
+## ⚙️ Installation
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/<your-github-username>/employee-management-api.git
+```
+
+### Navigate to the Project
+
+```bash
+cd employee-management-api
+```
+
+## 🛠️ Configure Database
+
+Update your database configuration in `application-dev.yml`.
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/employeems
+    username: your_username
+    password: your_password
+```
+
+Create the MySQL database before running the application.
+
+```sql
+CREATE DATABASE employeems;
+```
+
+## ▶️ Running the Application
+
+Run the application using Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+Or build and run the JAR:
+
+```bash
+mvn clean package
+
+java -jar target/employee-management-api-0.0.1-SNAPSHOT.jar
+```
+
+The application will start on:
+
+```text
+http://localhost:7070
+```
+
+## 🧪 API Documentation
+
+Once the application is running, access the Swagger UI:
+
+```text
+http://localhost:7070/swagger-ui/index.html
+```
+
+OpenAPI JSON:
+
+```text
+http://localhost:7070/v3/api-docs
+```
+
+## 📝 Sample Request
+
+### Create Employee
+
+```http
+POST /api/employees
+Content-Type: application/json
+```
+
+```json
+{
+  "employeeName": "Karthik",
+  "employeeEmail": "karthik@gmail.com",
+  "employeeSalary": 50000,
+  "employeeDepartment": "IT"
+}
+```
+
+## ✅ Sample Response
+
+```json
+{
+  "employeeId": 1,
+  "employeeName": "Karthik",
+  "employeeEmail": "karthik@gmail.com",
+  "employeeSalary": 50000,
+  "employeeDepartment": "IT"
+}
+```
+
+## 🚀 Future Enhancements
+
+- 🔐 Spring Security with JWT Authentication
+- 👥 Role-Based Authorization (Admin/User)
+- 🧪 Unit & Integration Testing (JUnit & Mockito)
+- 🐳 Docker & Docker Compose
+- ☁️ Cloud Deployment
+- ⚡ Redis Caching
+- 📩 Kafka Integration
+- 🌐 Microservices Architecture
+
+## 👨‍💻 Author
+
+**Posa Karthik**
+
+- GitHub: https://github.com/PosaKarthik
+- LinkedIn: https://www.linkedin.com/in/posa-karthik-225353408/
+
+Feel free to connect with me and provide feedback on the project.
+
+
+## 📄 License
+
+This project is created for learning and portfolio purposes.
