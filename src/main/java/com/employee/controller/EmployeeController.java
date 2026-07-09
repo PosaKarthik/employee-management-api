@@ -122,7 +122,7 @@ public class EmployeeController {
 
 	@Operation(summary = "Get employees with pagination and sorting", description = "Fetches employees using pagination and optional sorting")
 	@ApiResponses({ @ApiResponse(responseCode = "200", description = "Employees fetched successfully") })
-	@GetMapping("/bypagination")
+	@GetMapping("/pagination-and-sorting")
 	public ResponseEntity<PageResponseDTO<EmployeeResponseDTO>> getAllEmployeesByPagination(
 			@Parameter(description = "Page number (starts from 0)", example = "0") @RequestParam(defaultValue = "0") int pageNumber,
 			@Parameter(description = "Number of records per page", example = "5") @RequestParam(defaultValue = "5") int pageSize,
